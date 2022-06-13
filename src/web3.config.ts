@@ -1,0 +1,1 @@
+export const CONTRACT_ADDRESS = 'https://rinkeby.etherscan.io/address/0x50AF02f8B6b7ae4f49e48E7DFDa3604Ff3F40163';
