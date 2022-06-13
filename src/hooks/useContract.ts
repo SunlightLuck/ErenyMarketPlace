@@ -28,6 +28,6 @@ export const useContract = (address: string | undefined, ABI: any, withSignerIfP
 }
 
 export const useTokenContract = (): Contract | null => {
-  const contract = useContract("0x0507690B82801f1232e072dd2Ec35C3Bb7D055f9", ABI, true);
+  const contract = useContract("0x8AeEfC7bE207b31C2DEC4b3B30f2Cb7A6CeFA743", ABI, true);
   return contract; 
 }

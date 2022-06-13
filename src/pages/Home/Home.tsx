@@ -18,14 +18,14 @@ const Home = (props: any) => {
 
   useEffect(() => {
     if(account) {
-      initData();
+      console.log("---", account);
 //      getCount();
       contract?.on('Mint', (recipient: any, tokenId: any) => {
         console.log('MINTED', recipient, tokenId);
-        const metadata = getMetadata(tokenId);
-        dispatch(addData({
+        getMetadata(tokenId).then(metadata => dispatch(addData({
           metadata, owner: recipient
-        }))
+        })));
+        
       })
       contract?.on('Buy', (from: any, to: any, tokenId: any) => {
         console.log('SOLD', from, to, tokenId);
@@ -37,6 +37,7 @@ const Home = (props: any) => {
         console.log('COMMODITIZE', tokenId);
         dispatch(setCommoditize({tokenId: parseInt(tokenId)}))
       })
+      initData();
     }
     return () => {
       console.log("-------------REMOVE")
