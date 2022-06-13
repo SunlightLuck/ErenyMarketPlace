@@ -9,9 +9,9 @@ const Header = (props: any) => {
  
   return (<HeaderContainer>
     <div>
-      <NavLink onClick={() => props.showAccountGallary(0)}>All</NavLink>
-      <NavLink onClick={() => props.showAccountGallary(1)}>Mine</NavLink>
-      <NavLink onClick={() => props.showAccountGallary(2)}>Market</NavLink>
+      <NavLink active={props.showMode === 0} onClick={() => props.showAccountGallary(0)}>All</NavLink>
+      <NavLink active={props.showMode === 1} onClick={() => props.showAccountGallary(1)}>Mine</NavLink>
+      <NavLink active={props.showMode === 2} onClick={() => props.showAccountGallary(2)}>Market</NavLink>
     </div>
     <div>
       {account}
@@ -36,10 +36,11 @@ const HeaderContainer = styled.div`
   font-size: 20px;
 `
 
-const NavLink = styled.a`
+const NavLink = styled.a<any>`
   cursor: pointer;
   padding: 0 20px;
   line-height: 60px;
+  background-color: ${(props) => props.active ? 'rgba(255, 255, 255, .2)' : ''};
   :hover {
     background-color: rgba(255, 255, 255, .2);
   }

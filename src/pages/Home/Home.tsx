@@ -6,18 +6,20 @@ import {useTokenContract} from '../../hooks/useContract';
 import { useWeb3React } from '@web3-react/core';
 import UploadCard from '../../components/UploadCard/UploadCard';
 import { useDispatch, useSelector } from 'react-redux';
-import { addData, changeOwner, gallerySelector, setCommoditize, setImageCount } from '../../reducers/galleryReducer';
+import { addData, changeOwner, gallerySelector, setCommoditize, setImageCount, setUpdating } from '../../reducers/galleryReducer';
 import useGallery from '../../hooks/useGallery';
+import Loading from '../../components/Loading/Loading';
 
 const Home = (props: any) => {
   const {account} = useWeb3React();
   const contract = useTokenContract()
   const dispatch = useDispatch();
   const {initData, getMetadata} = useGallery();
-  const {metadata, owner, isCommodity, count} = useSelector(gallerySelector);
+  const {metadata, owner, isCommodity, count, isUpdating} = useSelector(gallerySelector);
 
   useEffect(() => {
     if(account) {
+      dispatch(setUpdating(true));
       console.log("---", account);
 //      getCount();
       contract?.on('Mint', (recipient: any, tokenId: any) => {
@@ -50,16 +52,14 @@ const Home = (props: any) => {
     (props.showMode === 0 || (props.showMode === 1 && owner[i] === account) || (props.showMode === 2 && isCommodity[i]) ? <ImageCard key={i} info={el} showMode = {props.showMode} isMine = {owner[i] === account} tokenId={i}></ImageCard> : null)
   ))
 
-  return (
+  return(
     <>
-    {count}
-    {account ? <Container>
-      { galleryList}
-      <UploadCard></UploadCard>
-    </Container> : null}
+      {account ? <><Container>
+        { !isUpdating ? galleryList : <Loading />}
+        <UploadCard></UploadCard>
+      </Container></> : null}
     </>
-    
-  )
+    );
 }
 
 const Container = styled.div`

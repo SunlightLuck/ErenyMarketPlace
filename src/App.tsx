@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header showAccountGallary = {(sm: number) => setShowMode(sm)}></Header>
+      <Header showMode = {showMode} showAccountGallary = {(sm: number) => setShowMode(sm)}></Header>
       <Home showMode={showMode}></Home>
     </div>
   );

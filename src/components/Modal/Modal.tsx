@@ -9,6 +9,7 @@ const Modal = (props: any) => {
       return alert("Input Price")
     }
     props.commoditize(price);
+    props.close();
   }
   return (props.show ? 
     <>

@@ -30,6 +30,7 @@ export const gallerySlice = createSlice({
       state.isCommodity = action.payload.isCommodity;
       state.metadata = action.payload.metadata;
       state.owner = action.payload.owner;
+      state.isUpdating = false;
     },
     addData: (state, action: PayloadAction<any>) => {
       state.count += 1;
@@ -43,10 +44,13 @@ export const gallerySlice = createSlice({
     },
     setCommoditize: (state, action: PayloadAction<any>) => {
       state.isCommodity[action.payload.tokenId] = true;
+    },
+    setUpdating: (state, action: PayloadAction<boolean>) => {
+      state.isUpdating = action.payload;
     }
   }
 })
 
-export const {setImageCount, addData, setGalleryData, changeOwner, setCommoditize} = gallerySlice.actions;
+export const {setImageCount, addData, setGalleryData, changeOwner, setCommoditize, setUpdating} = gallerySlice.actions;
 
 export const gallerySelector = (state: any) => state.gallery
