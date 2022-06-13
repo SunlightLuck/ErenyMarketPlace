@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Header showAccountGallary = {(sm: number) => setShowMode(sm)}></Header>
-      <Home showAll={showMode}></Home>
+      <Home showMode={showMode}></Home>
     </div>
   );
 }
